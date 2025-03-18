@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,7 +56,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.telaconfiguracoes.componentes.cardConfiguracoes
+import br.com.fiap.telaconfiguracoes.screens.Cadastro
+import br.com.fiap.telaconfiguracoes.screens.EnergySavingsScreen
+import br.com.fiap.telaconfiguracoes.screens.Registros
+import br.com.fiap.telaconfiguracoes.screens.Tela1
+import br.com.fiap.telaconfiguracoes.screens.TelaLogin
 import br.com.fiap.telaconfiguracoes.ui.theme.TelaConfiguracoesTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,7 +75,16 @@ class MainActivity : ComponentActivity() {
             TelaConfiguracoesTheme {
                 Surface() {
 
-                    ConfigScreen()
+                    val navController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = "login") {
+                        composable(route = "login") { TelaLogin(onLoginSuccess = {}, onNavigateToRegister = {}, navController)}
+                        composable(route = "configuracoes") { ConfigScreen() }
+                        composable(route = "home") { EnergySavingsScreen(navController) }
+                        composable(route = "cadastro"){ Cadastro(navController) }
+                        composable(route = "recuperacaoSenha"){ Tela1(navController) }
+
+                    }
 
 
                 }
@@ -80,7 +98,6 @@ class MainActivity : ComponentActivity() {
 fun ConfigScreen() {
 
 
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -89,8 +106,7 @@ fun ConfigScreen() {
 
         Column(
             modifier = Modifier
-                .padding(start = 20.dp, top = 40.dp, end = 20.dp )
-                .fillMaxSize(),
+                .padding(start = 20.dp, top = 40.dp, end = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -167,13 +183,111 @@ fun ConfigScreen() {
             Spacer(modifier = Modifier.height(40.dp))
 
             //Cards
-            cardConfiguracoes(R.drawable.door_closed_solid, descricaoIcon = "Portas Automáticas", tempoUso = "20 min")
-            cardConfiguracoes(R.drawable.lightbulb_regular, descricaoIcon = "Lâmpadas", tempoUso = "35 min")
-            cardConfiguracoes(R.drawable.temperature_quarter_solid, descricaoIcon = "Ar condicionado", tempoUso = "0 min")
-            cardConfiguracoes(R.drawable.battery_half_solid, descricaoIcon = "Gerador", tempoUso = "12 min")
-
+            cardConfiguracoes(
+                R.drawable.door_closed_solid,
+                descricaoIcon = "Portas Automáticas",
+                tempoUso = "20 min"
+            )
+            cardConfiguracoes(
+                R.drawable.lightbulb_regular,
+                descricaoIcon = "Lâmpadas",
+                tempoUso = "35 min"
+            )
+            cardConfiguracoes(
+                R.drawable.temperature_quarter_solid,
+                descricaoIcon = "Ar condicionado",
+                tempoUso = "0 min"
+            )
+            cardConfiguracoes(
+                R.drawable.battery_half_solid,
+                descricaoIcon = "Gerador",
+                tempoUso = "12 min"
+            )
 
         }
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .height(90.dp)
+                .background(
+                    colorResource(R.color.backgroud_cinza),
+                    shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp)
+                )
+                .align(Alignment.BottomCenter),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    painter = painterResource(R.drawable.gear_solid),
+                    //                    painter = painterResource(R.drawable.door_closed_solid),
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Gray,
+                    contentDescription = ""
+
+                )
+
+                Text(text = "Configurações", fontSize = 12.sp)
+            }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    painter = painterResource(R.drawable.bullseye_solid),
+                    //                    painter = painterResource(R.drawable.door_closed_solid),
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Gray,
+                    contentDescription = ""
+
+                )
+
+                Text(text = "Metas", fontSize = 12.sp)
+            }
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.seedling_solid),
+                    //                    painter = painterResource(R.drawable.door_closed_solid),
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Gray,
+                    contentDescription = ""
+
+                )
+
+                Spacer(Modifier.height(5.dp))
+
+                Text(text = "Energia", fontSize = 12.sp)
+            }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    painter = painterResource(R.drawable.repeat_solid),
+                    //                    painter = painterResource(R.drawable.door_closed_solid),
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Gray,
+                    contentDescription = ""
+
+                )
+
+                Text(text = "Comprar", fontSize = 12.sp)
+            }
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(
+                    painter = painterResource(R.drawable.chart_simple_solid),
+                    //                    painter = painterResource(R.drawable.door_closed_solid),
+                    modifier = Modifier.size(30.dp),
+                    tint = Color.Gray,
+                    contentDescription = ""
+
+                )
+
+                Text(text = "Relatórios", fontSize = 12.sp)
+            }
+        }
+
 
     }
 

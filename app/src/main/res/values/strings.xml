@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">TelaConfiguracoes</string>
+    <string name="app_login">Login</string>
+    <string name="logo_desc">Logo do aplicativo</string>
+    <string name="bem_vindo">Bem-vindo</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="esqueceu_senha">Esqueceu sua senha?</string>
+    <string name="nao_tem_conta">Não tem uma conta?</string>
+    <string name="cadastrar_se">Cadastre-se</string>
+    <string name="logar_desc">Insira seus dados de login para acessar:</string>
+    <string name="digite_email">Insira seu e-mail</string>
+    <string name="cadastre_senha">Cadastre sua senha</string>
+    <string name="entrar">Acessar</string>
+    <string name="ja_possui_conta">Já possui uma conta?</string>
+    <string name="entrar_google">Entrar com Google</string>
+    <string name="login_social">Ou acessar com:</string>
+    <string name="entrar_facebook">Entrar com Facebook</string>
+    <string name="senha_erro">Senha Incorreta!</string>
+    <string name="email_obrigatorio">E-mail é obrigatório</string>
 </resources>
